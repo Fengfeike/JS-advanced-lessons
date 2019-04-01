@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    // console.log("hello world");
+    var username="zhangsan";
+    var age;
+    function setName(){
+        username="lisi";
+    }
+    setName();
+    function setAge(){
+        age=20;
+    }
+    setAge();
+    function setInfor(){
+        setName();
+        setAge();
+    }
+    setInfor();
+    //javascript 中条件控制语句 if else
+    //空字符串转换成boolean类型是false
+    //循环控制 for/do while/while 
+    //parseInt() parseFloat() 强转换为int/float类型 typeof 查看元素类型
+    //定义函数 function关键字+名字+()+返回值 return;
+    //调用函数 函数名称(形参,实参);
+/* ---------------------------------------第二节课----------------------------------------- */
+    
+    //基本类型
+    var num1=20;
+    var num2=num1;
+    num1=10;
+    console.log(num2);//20  基本类型保存在栈区
+
+    //引用类型
+    var obj1={'username':"zhangsan"};
+    var obj2=obj1;
+    obj2.username="lisi";
+    console.log(obj1);//username:lisi  引用类型保存的是地址,保存在栈区，数据保存在堆区
+
+    var arr1=[1,2,3,4,5];
+    var arr2=arr1;
+    arr2[0]="赵晓宇是猪";
+    console.log(arr1);
+    
+    //数据类型检测 typeof instanceof
+    //浅拷贝 对象=对象
+    //深拷贝 创建一个新对象，让二者互不影响
+    var obj3={"username":"zhangsan"};
+    var obj4={};
+    var username=obj3.username;
+    obj4.username=username;
+
+    //"=="与"==="判等
+    //如果是引用类型判等的依据是指向空间是否相等
+    var obj5={};
+    var obj6={};
+    console.log(obj5==obj6);
+    //===判等依据是值和类型是否相等
+    var num3=10;
+    var num4=10;
+    console.log(num3===num4);
+    
+    //基本类型函数传参
+    var a=6;
+    function fun1(x){
+        x=5;
+    }
+    fn1(a);
+    console.log(a); //a=6
+    //引用类型函数传参
+    var obj7={"username":"zhangsan"};
+    function fn1(x){
+        x.username="lisi";
+    }
+    fn1(obj7);
+    console.log(obj7);//username:lisi
+  
+    //基本数据类型的值
+    // NaN   not a number;
+    // Infinity    无穷大
+    var x=20;
+    console.log(isNaN(x));//false
+
+    //  str.slice（截取字符串起始位置，截取字符串的结束位置）
+    //  负数可以从反方向计算索引
+    var str="ab_cd_ef";
+    console.log(str.slice(0,3));//ab_
+    console.log(str.slice(0,-1));//ab_cd_e
+
+    //str.split  用指定的分隔符，将字符串变成一个数组  将子串作为数组的数据元素，生成一个数组
+    console.log(str.split("_"));
+
+
+    var str0="abcdef";
+    console.log(str0.length);
+
+    //装箱操作
+    var strObject=new String(str0);
+    console.log(strObject.length);
+
+    //转换为boolean
+    console.log(Boolean(undefined));//false
+    console.log(Boolean(NaN));//false
+    console.log(Boolean(null));//false
+    console.log(Boolean(" "));//true
+    console.log(Boolean({}));//true
+    console.log(Boolean("0"));//true
+  
+    //转换为Number
+    console.log(Number(undefined));//NaN
+    console.log(true+1);// 2
+    console.log(Number(false));//0
+    console.log(Number("abc")); //NaN
+    console.log(Number("123.345xx"));//NaN
+    console.log(Number({x:1,y:2}));//NaN
+
+    console.log(parseInt("123.456xx"));//123
+    console.log(parseFloat("123.456xx"));//123.456
+    
+    //其他类型转换为字符串 + 一个空字符串
+    console.log(String(0));//0
+    console.log(String({x:1,y:2}));//[object,Object]
+    
+    //隐式转换  显式转换
+/*------------------------------------------第三节课------------------------------------------*/
+    //Number 的进阶 ↓
+
+
+    // toFixed(n)  保留特定位数的小数
+    // 超出特定位数的四舍五入  返回的是字符串
+    var num1 = 20;
+    num1.toFixed(2);//20.00
+
+    var num2 = 20.367;
+    num2.toFixed(2);//20.37
+    
+    var num3 = 10;
+    var numobject = new Number (num3);
+    console.log(numobject);
+
+    // console.log(numobject._proto_ == Number.prototype);
+    // numobject.toFixed();
+
+    //toPrecision 四舍五入进行保留的位数
+    // 数字位个数小于数字的整数位时，表示成指数形式
+    // 大于或等于数字整数位时，直接四舍五入截取
+    var num4 = 123456.789;
+    console.log(num4.toPrecision(1));//1e+5  1乘10的五次方
+    console.log(num4.toPrecision(2));//1.2e+5  1.2乘10的五次方
+    console.log(num4.toPrecision(3));//1.23e+5
+    console.log(num4.toPrecision(7));//123456.8
+
+    // String 的进阶
+
+
+    //charAt 返回特定位置的字符
+    console.log("abcde".charAt(2));//c
+
+    // fromCharCode 将特定的unicode转换成字符
+    console.log(String.fromCharCode(97,98,99));//abc
+
+    //charCodeAt 将特定的字符转换成Unicode
+    var str="abcdefghi";
+    console.log(str.charCodeAt(0));
+
+    //str.slice(截取的起始位置，截取的结束位置) 字符的截取  左闭右开
+    //如果截取的就结束位置小于0，实际结束位置为str.length+结束位置参数
+    console.log(str.slice(0,3));//abc
+    console.log(str.slice(0,-1));//abcdefgh
+
+    //str.substr(截取的起始位置，截取的长度) 字符的截取
+    console.log(str.substr(0));//没有截取长度时表示从起始位置开始截取后面整段字符串
+
+    //str.subString(截取起始位置，截取结束位置)
+    //如果截取的起始位置大于截取结束位置时，两者会互换位置
+    //如果超出0-str.length时，会被截断 
+    console.log(str.substring(0,-1));//？？？
+
+    //str.split(分隔符,限定生成数组的长度) 用指定的分隔符将String对象分割成一个数组
+    console.log(str.split("*"));
+
+    //字符串原型方法  ↓
+
+    //str.trim(); 去除字符串的空格
+      
+    //中间的空格不能去除，去除起始和结束位置的空格
+    var str1 = 'a       b         cd';
+    var str2 = '          a  bcd';
+    console.log(str1.trim());//a       b         cd
+    console.log(str2.trim());//a  bcd
+
+    //str.concat; 字符串的拼接
+    var str3 = "abc";
+    console.log(str3.concat("def","ghi"));//abcdefjhi
+
+    //str.toLowerCase & str.toUpperCase  字符串转小写&转大写
+
+    //str.indexof(指定字符串，查找的开始位置) 指定字符在字符串中第一次出现的位置
+    console.log(str.indexOf("b",3));//-1  查不到时返回-1
+
+    //str.lastIndexOf(查找的字符串,查找的位置)
+    var str5="abcdefghi";
+    console.log(str5.lastIndexOf("bcd"));//1
+/*-----------------------------------------------第四节课---------------------------------------------*/
+    //Boolean进阶 ↓
+
+    //所有对象转换成Boolean都是真值
+    console.log(Boolean(null));//false
+
+    //ES5 ECMAScript是一个语言标准，JavaScript是完全基于ECMAScript实现的脚本语言
+    //ES5是ECMAScript5简写
+    //ES5标准下，没有块级作用域
+
+    var username1;
+    if(false){
+         username1 = "zhangsan";
+    }
+    console.log(username1);//undefined
+
+    for(var i = 0;i < 3;i++){
+
+    }
+    console.log(i);//3
+
+    //全局的，对所有页面的js代码均应用严格模式
+    //'use strict'
+
+    //非严格模式下，不使用var来显示声明变量，则该变量自动转化为全局变量
+    function fn2(){
+        //'use strict'//函数内部应用严格模式
+        username="zhangsan";
+    }
+    fn2();
+    console.log(username);
+
+    //在非严格模式下，普通函数内，this指向全局对象
+    function fn3(){
+        console.log(this);
+    }
+    fn3();
+    //严格模式下，在普通函数内，this指向undefined
+    function fn4(){
+        'use strict'
+        console.log(this);
+    }
+    fn4();
+
+    function judge(){
+        var result = (this === undefined?true:false);
+        return result;
+    }
+        if(judge()){
+            console.log("严格模式");
+        }
+        else{
+            console.log("非严格模式");
+        }
+    judge();
+
+    var str = "abcdef";
+    str.length=1; 
+    console.log(str.length); // 6  
+
+    var str ='abcdef';
+    var strObject = new String(str);
+    strObject.length = 1;
+    console.log(new String(str).length);//6
+
+    // switch的值和case的值进行的是全等的比较，值和类型都需要相等
+    var index = 1;
+    switch(index){
+        case 1:
+            console.log("星期一");
+            break;
+        case 2:
+            console.log("星期二");
+            break;
+        default:
+            console.log("没有该选项");
+            break;
+        
+    }
+
+    var index1 = 1;
+    switch(index){
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+            console.log("工作日");
+            break;
+        case 6:
+        case 7:
+            console.log("休息日");
+            break;
+    }
+
+
+
+/*-----------------------------------------------第五节课---------------------------------------------*/
+
+    
+    var obj = {"username":"zhangsan","age":20};
+    obj.__proto__.sex = "male";
+    for(var i in obj){
+        console.log("键名："+i);//age
+
+        console.log("键值："+obj[i]);//20
+    }
+
+    var arr = [1,2,3,4,5];
+    for(var j in arr){
+        console.log(j);
+    }
+
+    var a = 45;
+    if(45 == a){
+        console.log("判断相等");
+    }
+
+    console.log(true+true);//2
+    console.log("5"-2);//3
+
+    var x = 1;
+    console.log(++x);//2
+    console.log(x++);//1
+
+    //+= 不会进行类型的转化
+    console.log(x +=1);
+
+    //{}==={} false   NAN===NAN false
+
+    //与运算 &&  左真取右，左假取左
+    console.log(10 && 0);//false
+    console.log(Boolean(0));//false
+    //或运算 ||  左真取左，左假取右
+    console.log(10 || null);//10
+    console.log(null || 10);//10
+
+    var score = 76;
+    if(score>90){
+        console.log("excllent");
+    }else if(score>75){
+        console.log("good");
+    }else if(score>60){
+        console.log("pass");
+    }else{
+        console.log("unpass");
+    }
+    console.log((score>90 && "优")||(score>75 && "良")||(score>60 && "及格")||(score<60 && "不及格"));
+
+    function sum(x,y,z){
+        x = x;
+        y = y;
+        z = z;
+        return x + y + z;
+    }
+    console.log(sum());//NAN
+
+    //ES6中实现设置函数参数的默认值
+    function sum1(x = 1 , y = 2 , z = 3){
+        return x + y + z;
+    }
+    console.log(sum1());
+
+
+/*-----------------------------------------------第六节课---------------------------------------------*/
+  //函数的声明  ↓
+    //function 显示声明
+    //max(2,3)在函数前调用，正常执行
+    function max(a,b){
+        return a>b? a:b;
+    }
+    max(2,3);
+
+    //
+    // min(2,3);在函数前调用，执行报错
+    var min = function(x,y){
+        return x>y? y:x;
+    }
+    min(2,3);
+
+    // Function(arg1,arg2,arg3,......,函数体)
+    //执行效率相对较低，但是更加灵活
+    var fn1 = new Function('a','b','return a>b? a:b;');
+    fn1(2,3);
+
+// 函数的调用  ↓  
+    //对象内部方法调用，this指向调用该方法的对象
+    // var obj = {
+    //     x:0,
+    //     test : function(){
+    //         console.log(this);
+    //     }
+    // }
+    // obj.test(); 
+
+    // var objA={'objName':"AAA"};
+    // var objB={'objName':"BBB"};
+    // objA.test = function(){
+    //     console.log(this.objName);
+
+    // }
+    // objA.test();
+    // objA.test.call(objB);
+
+/*-----------------------------------------------第七节课---------------------------------------------*/
+
+//对象 instanceof 构造函数
+//1.判断对象是否可以使用该构造函数实例化得到
+    function Person(username,age){
+        this.username=username;
+        this.age=age;
+    }
+    var person = new Person("zhangssan",20);
+    person instanceof Person;
+//arguments
+    function fn1(){
+        console.log(fn1.length);
+        for(var i=0;i<arguments.length;i++){
+            console.log(arguments[i]);
+        }
+    }
+    fn1(1,2,3);
+
+    function fn2(){
+        console.log(fn2.caller);
+    }
+    function fn3(){
+        fn2();
+    }
+    fn3();
+
+    var objA={'objName':"AAA"};
+    var objB={'objName':"BBB"};
+    objA.foo = function(){
+        console.log(this.objName);
+    }
+    objA.foo();
+    //方法.call
+    console.log(objA.foo.call(objA));
+
+    function Student(username,age,sex){
+        Person.call(this,username,age);
+        this.sex=sex;
+    }
+    var student= new Student("zhangsan",20,"male");
+    console.log(student);
+
+    //swim.call(对象，参数，参数)
+    function swim(m,n){
+        console.log(this.name,m,n);
+    }
+    var bird = {
+        name:"polly",
+        fly:function(m,n){
+            console.log(this.name,m,n);
+        }
+    };
+    var me = {
+        name:"ABC"
+    };
+    ///apply
+    //swim.apply(bird,["hello","world"]); 
+    swim.call(bird,"hello","world");
+
+    /*-----------------------------------------------第八节课---------------------------------------------*/
+    /*-----------------------------------------------第九节课---------------------------------------------*/
+   console.log("小猪回家");
+   var xx = ['书桌','书包','铅笔盒'];
+   consl.log("在家做作业中");
+   function goToStore(){
+       var yy = ['文具店老板','出售的文具'];
+       console.log("在文具店-买文具中");
+       console.log("在文具店-买好文具 发现没带钱");
+       goToBank();
+       console.log("在文具店-买好文具 返回家");
+
+   }
+
+</script>
+</html> 
